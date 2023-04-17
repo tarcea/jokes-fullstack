@@ -1,8 +1,12 @@
 # Jokes FullStack App
 
-## How to start the app
+## How to start the application
 
-In order to start the application, you must first turn on your Docker service (the Docker app from your computer)
+```bash
+git clone https://github.com/tarcea/jokes-fullstack
+```
+
+Turn on your Docker service (the Docker app from your computer)
 and then run the command:
 
 ```bash
