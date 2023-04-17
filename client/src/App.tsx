@@ -3,7 +3,15 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [data, setData] = useState({ jokes: [], types: [] });
+  const [data, setData] = useState({
+    jokes: [],
+    types: [],
+    letters: { mostCommonLetters: [], occurence: 0 },
+    totalAmountChars: 0,
+    occurenceOfThird: 0,
+    single: 0,
+    twopart: 0,
+  });
   console.log(data);
   const fetchJokes = async () => {
     const res = await axios('http://localhost:3001/jokes?type=any&amount=100');
@@ -23,7 +31,7 @@ function App() {
         word.includes('a') ? <span style={{ color: 'red' }}>{word}</span> : word
       );
   };
-  console.log(highlightAas('agher ghdtr'));
+  // console.log(highlightAas('agher ghdtr'));
   return (
     <div className='App'>
       <form onSubmit={handleSubmit}>
@@ -41,6 +49,17 @@ function App() {
             </div>
           );
         })}
+      </div>
+      <div>
+        <p>
+          Most Common Letters: {data.letters.mostCommonLetters.join(',')},
+          occurence: {data.letters.occurence}{' '}
+        </p>
+        <p>Total amount of characters: {data.totalAmountChars}</p>
+        <p>
+          How often the third letter of the last joke occurs:{' '}
+          {data.occurenceOfThird}
+        </p>
       </div>
     </div>
   );
