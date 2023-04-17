@@ -51,14 +51,16 @@ export const buildResult = (jokes: any[]) => {
   let twopart = 0;
   let single = 0;
   let j: string[] = [];
+  let types: string[] = [];
 
   jokes.forEach((joke) => {
+    types.push(joke.type);
     if (joke.type === 'twopart') {
       twopart += 1;
       j.push(`${joke.setup} ${joke.delivery}`);
     } else {
       single += 1;
-      j.push(joke.joke);
+      j.push(`${joke.joke}`);
     }
   });
 
@@ -68,6 +70,7 @@ export const buildResult = (jokes: any[]) => {
     twopart: twopart / sum,
     single: single / sum,
     jokes: j,
+    types,
     letters,
     occurenceOfThird: occurenceOfThird(j[j.length - 1]),
     totalAmountChars: countTotal(j.join('')),

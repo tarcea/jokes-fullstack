@@ -137,7 +137,7 @@ describe('helper functions', () => {
     expect(res.occurence).toBe(4);
   });
 
-  test('getAnalitics should return the required data', () => {
+  test('buildResult should return the required data', () => {
     const result = {
       twopart: 0.6,
       single: 0.4,
@@ -149,12 +149,13 @@ describe('helper functions', () => {
         "I'm reading a book about anti-gravity. It's impossible to put down!",
         "why do python programmers wear glasses? Because they can't C.",
       ],
-      mostCommonLetter: { mostCommonLetters: ['e'], occurence: 41 },
+      types: ['twopart', 'single', 'twopart', 'single', 'twopart'],
+      letters: { mostCommonLetters: ['e'], occurence: 41 },
       occurenceOfThird: 3,
       totalAmountChars: 363,
     };
     const data = buildResult(jokes);
-
+    console.log(data);
     expect(data).toMatchObject(result);
   });
 });
