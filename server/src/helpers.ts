@@ -85,8 +85,10 @@ export const buildResult = (jokes: any[]) => {
   let single = 0;
   let j: string[] = [];
   let types: string[] = [];
+  let cat: string[] = [];
 
   jokes.forEach((joke) => {
+    cat.push(joke.category);
     types.push(joke.type);
     if (joke.type === 'twopart') {
       twopart += 1;
@@ -110,6 +112,7 @@ export const buildResult = (jokes: any[]) => {
     occurenceOfThird: occurenceOfThird(j),
     totalAmountChars: countTotal(j.join('')),
     dominantCategory: dominant,
+    categories: cat,
   };
 };
 export const fetchJokes = async (
