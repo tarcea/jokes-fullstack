@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.app-container {
+  padding: 3rem;
+}
+
+.result-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.jokes-container {
+  width: 70%;
+  text-align: left;
+}
+
+.analitics-container {
+  width: 30%;
+  text-align: left;
+}
