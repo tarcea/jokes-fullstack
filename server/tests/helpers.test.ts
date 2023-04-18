@@ -1,8 +1,11 @@
 import 'jest';
 import {
   buildResult,
+  calculateMaxOccurence,
   countChar,
   countTotal,
+  getCategories,
+  getDominantCategory,
   getMostCommon,
   getTheThirdLetter,
   occurenceOfThird,
@@ -116,10 +119,16 @@ describe('helper functions', () => {
   });
 
   test('occurenceOfThird should return the number of occurence of the third letter in a string, except spaces', () => {
-    const occurence = occurenceOfThird(
-      'Why did the programmer jump on the table why?'
-    );
-    expect(occurence).toBe(2);
+    const j = [
+      'No matter how kind you are... German kids are always Kinder.',
+      'A programmer puts two glasses on his bedside table before going to sleep.\n' +
+        "A full one, in case he gets thirsty, and an empty one, in case he doesn't.",
+      "Thank you student loans for getting me through college. I don't think I'll ever be able to repay you.",
+      "I'm reading a book about anti-gravity. It's impossible to put down!",
+      "why do python programmers wear glasses? Because they can't C.",
+    ];
+    const occurence = occurenceOfThird(j);
+    expect(occurence).toBe(11);
   });
 
   test('countTotal should return the totla amount of characters in a text', () => {
@@ -151,11 +160,32 @@ describe('helper functions', () => {
       ],
       types: ['twopart', 'single', 'twopart', 'single', 'twopart'],
       letters: { mostCommonLetters: ['e'], occurence: 41 },
-      occurenceOfThird: 3,
+      occurenceOfThird: 11,
       totalAmountChars: 363,
     };
     const data = buildResult(jokes);
-    console.log(data);
+
     expect(data).toMatchObject(result);
+  });
+
+  test('getCategories should return the categories from the fetched jokes', () => {
+    const cat = getCategories(jokes);
+    expect(cat).toStrictEqual({ Pun: 3, Programming: 2 });
+  });
+
+  test('calculateMaxOccurence should return the element with the bigest value in an object', () => {
+    const cat = calculateMaxOccurence({ Pun: 3, Programming: 2, Test: 33 });
+
+    expect(cat.maxOccurence).toStrictEqual(['Test']);
+    expect(cat.times).toStrictEqual(33);
+    expect(cat.length).toStrictEqual(3);
+    expect(cat.percentage).toStrictEqual([86.84]);
+  });
+
+  test('getDominantCategory should ...', () => {
+    const g = getDominantCategory({ Pun: 3, Programming: 2, Test: 33 });
+
+    expect(g.category).toStrictEqual(['Test']);
+    expect(g.percentage).toStrictEqual([86.84]);
   });
 });

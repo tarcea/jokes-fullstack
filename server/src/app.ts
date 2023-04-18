@@ -16,7 +16,7 @@ app.get('/jokes', async (req: Request, res: Response) => {
       amount?.toString() || '10',
       type?.toString() || 'any'
     );
-    console.log(data);
+
     const jokes = amount === '1' ? [data] : data.jokes;
     const result = buildResult(jokes);
     return res.json(result);

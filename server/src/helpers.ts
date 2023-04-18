@@ -24,27 +24,60 @@ export const countTotal = (text: string) => {
   return cleanedString.length;
 };
 
-export const occurenceOfThird = (str: string) => {
-  const count = countChar(str);
-  const third = getTheThirdLetter(str);
+export const occurenceOfThird = (jokes: string[]) => {
+  const joke = jokes[jokes.length - 1];
+  const count = countChar(jokes.join(''));
+  const third = getTheThirdLetter(joke);
 
   return count[third];
 };
 
-export const getMostCommon = (text: string) => {
+export const calculateMaxOccurence = (obj: { [key: string]: number }) => {
   let res: number[] = [];
-  const count = countChar(text);
-  const letters: string[] = Object.keys(count);
-  const counters: number[] = Object.values(count);
-  const max: number = Math.max(...counters);
-  counters
+  let percentages: number[] = [];
+  const keys: string[] = Object.keys(obj);
+  const values: number[] = Object.values(obj);
+  const sum = values.reduce((partialSum, a) => partialSum + a, 0);
+  const max: number = Math.max(...values);
+  values
     .map((c: number, i) => {
+      const percent = (100 * c) / sum;
+      percentages.push(Math.round(percent * 100) / 100);
       return c === max ? i : undefined;
     })
     .forEach((index: number | undefined) => {
-      if (index) res.push(index);
+      if (index !== undefined) {
+        res.push(index);
+      }
     });
-  return { mostCommonLetters: res.map((r) => letters[r]), occurence: max };
+
+  return {
+    maxOccurence: res.map((r) => keys[r]),
+    percentage: res.map((r) => percentages[r]),
+    times: max,
+    length: keys.length,
+  };
+};
+
+export const getMostCommon = (text: string) => {
+  const count = countChar(text);
+  const occ = calculateMaxOccurence(count);
+  return { mostCommonLetters: occ.maxOccurence, occurence: occ.times };
+};
+
+export const getCategories = (jokes: any[]) => {
+  let counts: any = {};
+  jokes.forEach((joke) => {
+    counts[joke.category] = (counts[joke.category] || 0) + 1;
+  });
+  return counts;
+};
+
+export const getDominantCategory = (categoriesObject: {
+  [key: string]: number;
+}) => {
+  const occ = calculateMaxOccurence(categoriesObject);
+  return { category: occ.maxOccurence, percentage: occ.percentage };
 };
 
 export const buildResult = (jokes: any[]) => {
@@ -66,14 +99,17 @@ export const buildResult = (jokes: any[]) => {
 
   const sum = single + twopart;
   const letters = getMostCommon(j.join(''));
+  const categories = getCategories(jokes);
+  const dominant = getDominantCategory(categories);
   return {
     twopart: twopart / sum,
     single: single / sum,
     jokes: j,
     types,
     letters,
-    occurenceOfThird: occurenceOfThird(j[j.length - 1]),
+    occurenceOfThird: occurenceOfThird(j),
     totalAmountChars: countTotal(j.join('')),
+    dominantCategory: dominant,
   };
 };
 export const fetchJokes = async (
