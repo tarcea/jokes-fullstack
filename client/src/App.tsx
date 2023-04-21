@@ -41,9 +41,9 @@ function App() {
 
   return (
     <div className='app-container'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form'>
         <label>
-          Pick the joke type:
+          joke type:
           <select value={type} onChange={handleChangeType}>
             <option value='any'>Any</option>
             <option value='single'>Single</option>
@@ -51,7 +51,7 @@ function App() {
           </select>
         </label>
         <label>
-          Pick how many jokes to show:
+          jokes to show:
           <select value={amount} onChange={handleChangeAmount}>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -65,7 +65,7 @@ function App() {
             <option value='10'>10</option>
           </select>
         </label>
-        <input type='submit' placeholder='type' />
+        <input type='submit' placeholder='type' value='Get Jokes' />
       </form>
       <div className='result-container'>
         <div className='jokes-container'>

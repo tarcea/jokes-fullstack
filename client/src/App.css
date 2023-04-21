@@ -55,3 +55,35 @@
   width: 30%;
   text-align: left;
 }
+
+.form {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* border: 1px solid orange; */
+  padding: 1em;
+  margin-bottom: 0.8em;
+}
+
+.form select {
+  display: flex;
+  margin-bottom: 0.8em;
+  font-size: 1.5em;
+  height: 2em;
+  border-radius: 5px;
+  border: 1px solid orange;
+  width: 20rem;
+}
+
+.form input[type='submit'] {
+  height: 2em;
+  background: orange;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 0.8em;
+  font-size: 1.5em;
+  width: 20rem;
+}
+
+label {
+  font-weight: bold;
+}
