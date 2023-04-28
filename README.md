@@ -80,3 +80,17 @@ set of statistics and provide it to the end user.
 
 - Calculate which is the dominant category and in which percentage it occurs. If it’s a
   draw, it should be presented as such
+
+### Bonus
+
+- The application is runnable in a docker container
+
+- Native functions are used where appropriate
+
+- Usage of OOP or functional programming where appropriate
+
+- Usage of TypeScript
+
+- Error handling where you see potential user experience flaws or system failure risks
+
+- A reactive framework being used on the frontend
