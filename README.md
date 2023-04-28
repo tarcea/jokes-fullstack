@@ -1,4 +1,4 @@
-# Jokes FullStack App ([task description](./task-description.md))
+# Jokes FullStack App ([task description](#task-description))
 
 ## How to start the application
 
